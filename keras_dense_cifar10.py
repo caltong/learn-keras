@@ -42,7 +42,11 @@ x_train_rgb = x_train_rgb.reshape(x_train_rgb.shape[0],-1)/255.0
 y_train = np_utils.to_categorical(y_train,num_classes=10)
 
 model = Sequential()
-model.add(Dense(32,input_dim=1024))  #全连接层
+model.add(Dense(1024,input_dim=1024))  #全连接层
+model.add(Activation('relu'))
+model.add(Dense(512))
+model.add(Activation('relu'))
+model.add(Dense(128))
 model.add(Activation('relu'))
 model.add(Dense(10))                 #全连接层
 model.add(Activation('softmax'))
@@ -50,4 +54,4 @@ model.add(Activation('softmax'))
 rmsprop = RMSprop(lr=0.001,rho=0.9,epsilon=1e-08,decay=0.0)   #RMSprop 优化
 
 model.compile(optimizer=rmsprop,loss='categorical_crossentropy',metrics=['accuracy'])
-model.fit(x_train_rgb,y_train,epochs=2,batch_size=32)   # 结果acc=0.1 flat后的数据acc=0.19
+model.fit(x_train_rgb,y_train,epochs=2,batch_size=16)   # 结果acc=0.1 flat后的数据acc=0.19
