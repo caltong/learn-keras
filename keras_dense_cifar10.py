@@ -54,4 +54,4 @@ model.add(Activation('softmax'))
 rmsprop = RMSprop(lr=0.001,rho=0.9,epsilon=1e-08,decay=0.0)   #RMSprop 优化
 
 model.compile(optimizer=rmsprop,loss='categorical_crossentropy',metrics=['accuracy'])
-model.fit(x_train_rgb,y_train,epochs=2,batch_size=16)   # 结果acc=0.1 flat后的数据acc=0.19
+model.fit(x_train_rgb,y_train,epochs=12,batch_size=16)   # 结果acc=0.1 flat后的数据acc=0.19
