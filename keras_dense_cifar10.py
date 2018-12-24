@@ -29,12 +29,23 @@ def get_photo_gray(pixel):
     gray = 0.299*r+0.587*g+0.114*b
     return gray
 
-data = unpickle('cifar-10-batches-py\data_batch_1')  #打开指定位置的pickle
-x_train = data[b'data']   #flat数据
-y_train = data[b'labels']  #标签
+
+x_train = []
+y_train = []
+for i in [1,2,3,4,5]:  #遍历数据集的全部5各包
+    path = 'cifar-10-batches-py\data_batch_'+str(i)  #获取路径
+    data = unpickle(path) # unpickle 打开数据集
+    for i in range(10000):
+        x_train.append(data[b'data'][i])  #把所有数据读入x_train和y_train
+        y_train.append(data[b'labels'][i])
+print(len(x_train),len(x_train[0]))
+print(len(y_train))
+# data = unpickle('cifar-10-batches-py\data_batch_1')  #打开指定位置的pickle
+# x_train = data[b'data']   #flat数据
+# y_train = data[b'labels']  #标签
 #x_train_rgb = [[0 for i in range(10000) for j in range(1024)]]
-x_train_rgb = np.zeros((10000, 1024), dtype=np.float32)
-for i in range(10000):
+x_train_rgb = np.zeros((50000, 1024), dtype=np.float32)
+for i in range(50000):
     x_train_rgb[i] = get_photo_gray(x_train[i])  #转换成灰度
 
 
